@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+body {
+  font-family: "Sora", sans-serif;
+}
+.item-button button {
+  margin-top: 20px;
+  width: 140px;
+  background-color: green;
+  color: #fff;
+}
+/* DefaultLayout.css */
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  position: relative; 
+  margin-right: 20px;
+}
+
+.category {
+  border: 2px solid gray;
+  margin-right: 25px;
+  margin-bottom: 40px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.category img {
+  margin-left: 10px;
+}
+
+.category-active {
+  border: 2px solid green;
+}
+/* =========================== register page ========================= */
+.register, .login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.register Input, .login Input, .register .input-password, .login .input-password {
+  width: 400px;
+}
