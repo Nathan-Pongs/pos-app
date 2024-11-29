@@ -68,8 +68,8 @@ const DefaultLayout = ({ children }) => {
               Customers
             </Link>
           </Menu.Item>
-          <Menu.Item key="/insights" icon={<DashboardOutlined />}>
-            <Link to="/dashboard" className="link">
+          <Menu.Item key="/dashboards" icon={<DashboardOutlined />}>
+            <Link to="/dashboards" className="link">
               Dashboard
             </Link>
           </Menu.Item>
