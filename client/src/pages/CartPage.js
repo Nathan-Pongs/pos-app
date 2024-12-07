@@ -93,7 +93,6 @@ const CartPage = () => {
         </head>
         <body>
           <h1>Invoice</h1>
-          <p><strong>Customer Name:</strong> ${billPreview.billCode}</p>
           <p><strong>Customer Name:</strong> ${billPreview.customerName}</p>
           <p><strong>Customer Contact:</strong> ${billPreview.customerContact}</p>
           <p><strong>Date:</strong> ${new Date(billPreview.date).toLocaleString()}</p>
@@ -140,10 +139,6 @@ const CartPage = () => {
   }, [cartItems]);
 
   const itemColumns = [
-    {
-      title: 'Bill Code',
-      dataIndex: 'billCode',
-    },
     {
       title: 'Product',
       dataIndex: 'name',
