@@ -33,4 +33,30 @@ const registerController = async (req, res) => {
   }
 };
 
-module.exports = { loginController, registerController };
+const getAllUsersController = async (req, res) => {
+  console.log("Fetching users...");
+  try {
+      const users = await userModel.find();
+      console.log("Users fetched:", users);
+      res.json(users);
+  } catch (error) {
+      console.error("Error fetching users:", error);
+      res.status(500).send("Error fetching users");
+  }
+};
+
+const deleteUserController = async (req, res) => {
+  const { id } = req.params;  // Extract the ID from the request parameters
+  try {
+      const deletedUser = await userModel.findByIdAndDelete(id);
+      if (!deletedUser) {
+          return res.status(404).send({ success: false, message: 'User not found' });
+      }
+      res.send({ success: true, message: 'User deleted successfully', deletedUser: deletedUser });
+  } catch (error) {
+      console.error("Error deleting user:", error);
+      res.status(500).send({ success: false, message: 'Error deleting user' });
+  }
+};
+
+module.exports = { loginController, registerController, getAllUsersController, deleteUserController };

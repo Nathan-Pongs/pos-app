@@ -11,7 +11,8 @@ import {
   CopyOutlined,
   UnorderedListOutlined,
   ShoppingCartOutlined,
-  DashboardOutlined
+  DashboardOutlined,
+  UserSwitchOutlined
 } from "@ant-design/icons";
 import "../styles/DefaultLayout.css";
 
@@ -71,6 +72,11 @@ const DefaultLayout = ({ children }) => {
           <Menu.Item key="/dashboards" icon={<DashboardOutlined />}>
             <Link to="/dashboards" className="link">
               Dashboard
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="/users" icon={<UserSwitchOutlined />}>
+            <Link to="/users" className="link">
+              Manage User
             </Link>
           </Menu.Item>
           <Menu.Item key="/logout" icon={<LogoutOutlined />} onClick={handleLogout}>

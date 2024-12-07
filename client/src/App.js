@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import BillsPage from './pages/BillsPage';
 import CustomerPage from './pages/CustomerPage';
 import DashboardPage from './pages/DashboardPage';
+import UserPage from './pages/UserPage';
 function App() {
   return (
     <>
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
                 <Route path="/bills" element={<ProtectedRoute><BillsPage /></ProtectedRoute>} />
                 <Route path="/customers" element={<ProtectedRoute><CustomerPage /></ProtectedRoute>} />
+                <Route path="/users" element={<ProtectedRoute><UserPage /></ProtectedRoute>} />
                 <Route path="/dashboards" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
             </Routes>
         </BrowserRouter>
