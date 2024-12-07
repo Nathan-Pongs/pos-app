@@ -41,7 +41,7 @@ const DefaultLayout = ({ children }) => {
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="logo">
-          <h1 className="text-center text-light fs-4">Food Order</h1>
+          <h1 className="text-center text-light fs-4">POS APP</h1>
         </div>
         <Menu
           theme="dark"
