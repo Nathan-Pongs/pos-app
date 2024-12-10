@@ -13,7 +13,6 @@ const CartPage = () => {
   const [showPreviewModal, setShowPreviewModal] = useState(false); // New state for bill preview modal
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.rootReducer?.cartItems || []);
-  const date = useSelector((state) => state.rootReducer?.date ? new Date(state.rootReducer.date) : new Date());
 
   const handleIncrement = (record) => {
     dispatch({
@@ -40,9 +39,20 @@ const CartPage = () => {
 
   const handleSubmit = async (values) => {
     try {
+      // Generate billCode in YYYYMMDD-00001 format
+      const date = new Date();
+      const dateString = date.toISOString().split('T')[0].replace(/-/g, ''); // Format YYYYMMDD
+  
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_BASE_URL}/api/bills/count?date=${dateString}`
+      );
+      const count = response.data.count || 0;
+      const paddedCounter = (count + 1).toString().padStart(5, '0');
+      const billCode = `${dateString}-${paddedCounter}`;
+  
       const tax = parseFloat(((subTotal / 100) * 10).toFixed(2));
       const totalAmount = parseFloat((subTotal + tax).toFixed(2));
-
+  
       const newBill = {
         ...values,
         cartItems,
@@ -50,31 +60,32 @@ const CartPage = () => {
         subTotal,
         tax,
         totalAmount,
+        billCode,
       };
-
+  
       const newCustomer = {
         ...values,
-        date
-      }
-
+        date,
+      };
+  
       await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/bills/add-bill`, newBill);
       message.success('Bill generated successfully!');
-
+  
       await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/customer/add-customer`, newCustomer);
-
+  
       // Clear cart after successful bill generation
       dispatch({ type: 'CLEAR_CART' });
-
+  
       // Set bill preview data and show modal
       setBillPreview(newBill);
       setShowPreviewModal(true);
-
+  
       setBillPopup(false); // Close form modal
     } catch (error) {
       message.error('Something went wrong!');
-      console.log(error);
+      console.error(error);
     }
-  };
+  };  
 
   const handlePrint = () => {
     const printWindow = window.open('', '_blank');
@@ -93,6 +104,7 @@ const CartPage = () => {
         </head>
         <body>
           <h1>Invoice</h1>
+          <p><strong>Bill Code:</strong> ${billPreview.billCode}</p>
           <p><strong>Customer Name:</strong> ${billPreview.customerName}</p>
           <p><strong>Customer Contact:</strong> ${billPreview.customerContact}</p>
           <p><strong>Date:</strong> ${new Date(billPreview.date).toLocaleString()}</p>
