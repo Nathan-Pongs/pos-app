@@ -59,4 +59,13 @@ const deleteUserController = async (req, res) => {
   }
 };
 
-module.exports = { loginController, registerController, getAllUsersController, deleteUserController };
+const getUserCount = async (req, res) => {
+  try {
+    const count = await userModel.countDocuments();
+    res.status(200).json({count});
+  } catch (error) {
+    res.status(500).send('Error fetching users!');
+  }
+}
+
+module.exports = { loginController, registerController, getAllUsersController, deleteUserController, getUserCount };

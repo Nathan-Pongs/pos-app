@@ -11,6 +11,15 @@ const getCustomerController = async (req, res) => {
   }
 };
 
+const getCustomerCount = async (req, res) => {
+  try {
+    const count = await customerModel.countDocuments();
+    res.json({count});
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
+
 // Add a new item
 const addCustomerController = async (req, res) => {
     try {
@@ -39,4 +48,4 @@ const deleteCustomerController = async (req, res) => {
   }
 };
 
-module.exports = { getCustomerController, addCustomerController, deleteCustomerController };
+module.exports = { getCustomerController, addCustomerController, deleteCustomerController, getCustomerCount };

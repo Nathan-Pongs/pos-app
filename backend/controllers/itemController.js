@@ -11,6 +11,15 @@ const getItemController = async (req, res) => {
   }
 };
 
+const getItemCount = async (req, res) => {
+  try {
+    const count = await itemModel.countDocuments();
+    res.json({count});
+  } catch (error) {
+    res.status(500).send('Error fetching items');
+  }
+}
+
 // Add a new item
 const addItemController = async (req, res) => {
   try {
@@ -18,7 +27,6 @@ const addItemController = async (req, res) => {
     await newItem.save();
     res.status(201).send('Item created successfully!');
   } catch (error) {
-    console.log(error);
     res.status(400).send('Error creating item');
   }
 };
@@ -57,4 +65,4 @@ const deleteItemController = async (req, res) => {
   }
 };
 
-module.exports = { getItemController, addItemController, updateItemController, deleteItemController };
+module.exports = { getItemController, addItemController, updateItemController, deleteItemController, getItemCount };

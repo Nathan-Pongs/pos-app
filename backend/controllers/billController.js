@@ -6,10 +6,18 @@ const getBillController = async (req, res) => {
     const bills = await billsModel.find();
     res.status(200).send(bills);
   } catch (error) {
-    console.log(error);
     res.status(500).send('Error fetching bills');
   }
 };
+
+const getBillCount = async (req, res) => {
+  try {
+    const count = await billsModel.countDocuments();
+    res.json({count});
+  } catch (error) {
+    res.status(500).send('Error fetching bills!')
+  }
+}
 
 
 // Add a new item
@@ -80,4 +88,4 @@ const deleteBillController = async (req, res) => {
   }
 };
 
-module.exports = { getBillController, addBillController, deleteBillController, billCountController };
+module.exports = { getBillController, addBillController, deleteBillController, billCountController, getBillCount };
