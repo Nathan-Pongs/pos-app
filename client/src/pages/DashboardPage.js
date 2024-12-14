@@ -12,10 +12,10 @@ function DashboardPage() {
   const [users, setUsers] = useState(0);
 
   useEffect(() => {
-    axios.get('api/bills/bill-count').then(res => setBills(res.data.count)).catch(err => console.log(err));
-    axios.get('api/customer/customer-count').then(res => setCustomer(res.data.count)).catch(err => console.log(err));
-    axios.get('api/items/item-count').then(res => setItems(res.data.count)).catch(err => console.log(err));
-    axios.get('api/users/user-count').then(res => setUsers(res.data.count)).catch(err => console.log(err));
+    axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/bills/bill-count`).then(res => setBills(res.data.count)).catch(err => console.log(err));
+    axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/customer/customer-count`).then(res => setCustomer(res.data.count)).catch(err => console.log(err));
+    axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/items/item-count`).then(res => setItems(res.data.count)).catch(err => console.log(err));
+    axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/users/user-count`).then(res => setUsers(res.data.count)).catch(err => console.log(err));
   }, []);
 
   // Prepare data for the bar chart
