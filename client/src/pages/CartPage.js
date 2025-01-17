@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DefaultLayout from '../components/DefaultLayout';
 import { useSelector, useDispatch } from 'react-redux';
 import { DeleteOutlined, PlusCircleOutlined, MinusCircleOutlined, PrinterOutlined } from '@ant-design/icons';
-import { Button, Table, Modal, Form, Select, Input, message } from 'antd';
+import { Button, Table, Modal, Form, Select, Input, message, QRCode, Space } from 'antd';
 import axios from 'axios';
 
 const CartPage = () => {
@@ -296,6 +296,11 @@ const CartPage = () => {
             <p><strong>Total Amount:</strong> ${parseFloat(billPreview.totalAmount).toFixed(2)}</p>
             <p><strong>Paid by:</strong> {billPreview.paymentMode}</p>
           </div>
+          {billPreview.paymentMode === "Bank Transfer" && (
+            <Space style={{ display: 'flex', justifyContent: 'center' }}>
+              <QRCode type="svg" value="https://pay.ababank.com/gcYTLfDnFVCE7JQE8" />
+            </Space>
+          )}
         </div>
       </Modal>
       )}

@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import DefaultLayout from '../components/DefaultLayout';
 import { EyeOutlined, DeleteOutlined, PrinterOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import { Table, message, Modal, Button } from 'antd';
+import { Table, message, Modal, Button, Space, QRCode } from 'antd';
 import axios from 'axios';
 
 const { confirm } = Modal;
@@ -224,6 +224,11 @@ const BillsPage = () => {
               <p><strong>Total Amount:</strong> ${parseFloat(selectedBill.totalAmount).toFixed(2)}</p>
               <p><strong>Paid by:</strong> {selectedBill.paymentMode}</p>
             </div>
+            {selectedBill.paymentMode === "Bank Transfer" && (
+              <Space style={{ display: 'flex', justifyContent: 'center' }}>
+                <QRCode type="svg" value="https://pay.ababank.com/gcYTLfDnFVCE7JQE8" />
+              </Space>
+            )}
           </div>
         </Modal>
       )}
